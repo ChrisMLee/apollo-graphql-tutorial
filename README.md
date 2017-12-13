@@ -1,6 +1,10 @@
 # graphql-tutorial
 Full-stack GraphQL tutorials with React, Redux and Apollo
 
+via https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
+
+new 2.0 setup: https://www.apollographql.com/docs/react/basics/setup.html
+
 [Part 1: the frontend](https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b)
 
 1. Build a simple React app with GraphQL and Apollo
