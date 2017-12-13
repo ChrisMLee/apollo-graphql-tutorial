@@ -1,5 +1,4 @@
-export const typeDefs =
-
+export const typeDefs = `
 type Channel {
   id: ID!
   name: String
@@ -14,4 +13,4 @@ query ChannelsListQuery {
     id
     name
   }
-}
+}`;
