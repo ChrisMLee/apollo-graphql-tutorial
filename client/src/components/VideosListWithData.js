@@ -34,6 +34,12 @@ const VideosList = ({ data: { loading, error, videos } }) => {
   );
 };
 
-const VideosListWithData = graphql(videosListQuery)(VideosList);
+/* POLLING */
+export default graphql(videosListQuery, {
+  options: { pollInterval: 5000 }
+})(VideosList);
 
-export default VideosListWithData;
+/* NON-POLLING */
+// const VideosListWithData = graphql(videosListQuery)(VideosList);
+
+// export default VideosListWithData;

@@ -1,9 +1,18 @@
-# graphql-tutorial
-Full-stack GraphQL tutorials with React, Redux and Apollo
+# apollo-graphql-tutorial
 
-via https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
+an adaptation of https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b using apollo client 2.0 code and a graphql server/schema based on https://egghead.io/courses/build-a-graphql-server.
 
-new 2.0 setup: https://www.apollographql.com/docs/react/basics/setup.html
+server code: https://github.com/ChrisMLee/egghead-graphql-server
+
+new 2.0 setup: https://www.apollographql.com/docs/react/basics/setup.html  
+
+to start:  
+`egghead-graphql-server $ node index.js`  
+`apollo-graphql-tutorial/client $ yarn start`  
+
+Helpful references:  
+proxy create-react-app requests: https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/  
+https://github.com/facebookincubator/create-react-app/issues/1378#issuecomment-337740459
 
 [Part 1: the frontend](https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b)
 
