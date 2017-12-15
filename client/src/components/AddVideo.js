@@ -22,8 +22,24 @@ const AddVideo = ({ mutate }) => {
     if (evt.keyCode === 13) {
       evt.persist();
       mutate({
-        variables: { title: evt.target.value },
-        refetchQueries: [{ query: videosListQuery }]
+        variables: {
+          input: {
+            title: evt.target.value,
+            duration: 300,
+            watched: false,
+            clientMutationId: "abcd"
+          }
+        },
+        update: (store, { data: { createVideo } }) => {
+          // Read the data from the cache for this query.
+          const data = store.readQuery({ query: videosListQuery });
+          console.log("data.videos.edges", data.videos.edges);
+          console.log("createVideo", createVideo.video);
+          // Add our video from the mutation to the end
+          data.videos.edges.push(createVideo.video);
+          // Write the data back to the cache
+          store.writeQuery({ query: videosListQuery, data });
+        }
       }).then(res => {
         evt.target.value = "";
       });
@@ -33,10 +49,13 @@ const AddVideo = ({ mutate }) => {
 };
 
 const addVideoMutation = gql`
-  mutation createVideo($title: String!) {
-    createVideo(video: { title: $title, duration: 300, watched: false }) {
-      id
-      title
+  mutation AddVideoQuery($input: AddVideoInput!) {
+    createVideo(input: $input) {
+      video {
+        id
+        title
+        __typename
+      }
     }
   }
 `;
