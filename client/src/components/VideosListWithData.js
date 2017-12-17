@@ -31,7 +31,14 @@ const VideosList = ({ data: { loading, error, videos } }) => {
       <AddVideo />
       {videos && (
         <ul>
-          {videos.edges.map(e => <li key={e.node.id}>{e.node.title}</li>)}
+          {videos.edges.map(e => (
+            <li
+              className={"video " + (e.node.id < 0 ? "optimistic" : "")}
+              key={e.node.id}
+            >
+              {e.node.title}
+            </li>
+          ))}
         </ul>
       )}
     </div>

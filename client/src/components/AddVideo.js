@@ -37,6 +37,21 @@ const AddVideo = ({ mutate }) => {
           data.videos.edges.push(createVideo.videoEdge);
           // Write the data back to the cache
           store.writeQuery({ query: videosListQuery, data });
+        },
+        optimisticResponse: {
+          createVideo: {
+            __typename: "AddVideoPayload",
+            videoEdge: {
+              __typename: "VideoEdge",
+              node: {
+                __typename: "Video",
+                title: evt.target.value,
+                duration: 300,
+                watched: false,
+                id: Math.round(Math.random() * -1000000)
+              }
+            }
+          }
         }
       }).then(res => {
         evt.target.value = "";
