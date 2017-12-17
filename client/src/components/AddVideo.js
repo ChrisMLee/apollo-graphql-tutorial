@@ -33,10 +33,8 @@ const AddVideo = ({ mutate }) => {
         update: (store, { data: { createVideo } }) => {
           // Read the data from the cache for this query.
           const data = store.readQuery({ query: videosListQuery });
-          console.log("data.videos.edges", data.videos.edges);
-          console.log("createVideo", createVideo.video);
           // Add our video from the mutation to the end
-          data.videos.edges.push(createVideo.video);
+          data.videos.edges.push(createVideo.videoEdge);
           // Write the data back to the cache
           store.writeQuery({ query: videosListQuery, data });
         }
@@ -51,10 +49,13 @@ const AddVideo = ({ mutate }) => {
 const addVideoMutation = gql`
   mutation AddVideoQuery($input: AddVideoInput!) {
     createVideo(input: $input) {
-      video {
-        id
-        title
-        __typename
+      videoEdge {
+        node {
+          id
+          title
+          watched
+          duration
+        }
       }
     }
   }

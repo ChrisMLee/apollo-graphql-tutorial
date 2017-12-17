@@ -29,7 +29,11 @@ const VideosList = ({ data: { loading, error, videos } }) => {
   return (
     <div>
       <AddVideo />
-      <ul>{videos.edges.map(e => <li key={e.node.id}>{e.node.title}</li>)}</ul>
+      {videos && (
+        <ul>
+          {videos.edges.map(e => <li key={e.node.id}>{e.node.title}</li>)}
+        </ul>
+      )}
     </div>
   );
 };
