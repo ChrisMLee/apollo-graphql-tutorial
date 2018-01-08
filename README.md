@@ -9,6 +9,7 @@ new 2.0 setup: https://www.apollographql.com/docs/react/basics/setup.html
 to start:  
 `egghead-graphql-server $ node index.js`  
 `apollo-graphql-tutorial/client $ yarn start`  
+`visit http://localhost:3000/`
 
 Helpful references:  
 proxy create-react-app requests: https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/  
