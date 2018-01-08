@@ -1,7 +1,8 @@
 import React from "react";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import gql from "graphql-tag";
 import AddVideo from "./AddVideo.js";
+import updateVideo from "../graphql/updateVideo";
 
 const videosListQuery = gql(`
   query VideosListQuery {
@@ -18,7 +19,7 @@ const videosListQuery = gql(`
   }
 `);
 
-const VideosList = ({ data: { loading, error, videos } }) => {
+const VideosList = ({ data: { loading, error, videos }, updateVideoFn }) => {
   console.log("videos", videos);
   if (loading) {
     return <p>Loading ...</p>;
@@ -35,6 +36,15 @@ const VideosList = ({ data: { loading, error, videos } }) => {
             <li
               className={"video " + (e.node.id < 0 ? "optimistic" : "")}
               key={e.node.id}
+              onClick={() =>
+                updateVideoFn({
+                  variables: {
+                    title: e.node.title,
+                    watched: e.node.watched,
+                    duration: e.node.duration
+                  }
+                })
+              }
             >
               {e.node.title}
             </li>
@@ -53,4 +63,7 @@ const VideosList = ({ data: { loading, error, videos } }) => {
 /* NON-POLLING */
 const VideosListWithData = graphql(videosListQuery)(VideosList);
 
-export default VideosListWithData;
+export default compose(
+  graphql(updateVideo, { name: "updateVideoFn" }),
+  graphql(videosListQuery)
+)(VideosList);
